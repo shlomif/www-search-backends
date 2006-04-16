@@ -12,7 +12,7 @@ use Scalar::Util ();
 
 =head1 NAME
 
-WWW::Search::MSN - The great new WWW::Search::MSN!
+WWW::Search::MSN - backend for searching search.msn.com
 
 =head1 VERSION
 
@@ -20,7 +20,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.0101';
 
 use vars qw(@ISA);
 
@@ -30,8 +30,6 @@ use vars qw(@ISA);
 
 This module provides a backend of L<WWW::Search> to search using 
 L<http://search.msn.com/>.
-
-Perhaps a little code snippet.
 
     use WWW::Search;
 
