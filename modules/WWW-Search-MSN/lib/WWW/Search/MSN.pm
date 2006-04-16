@@ -197,6 +197,17 @@ your bug as I make changes.
 
 =head1 ACKNOWLEDGEMENTS
 
+Funded by L<http://www.deviatemedia.com/> and
+L<http://www.redtreesystems.com/>.
+
+=head1 DEVELOPMENT
+
+Source code is version-controlled in a Subversion repository in Berlios:
+
+L<http://svn.berlios.de/svnroot/repos/web-cpan/WWW-Search/trunk/>
+
+One can find the most up-to-date version there.
+
 =head1 COPYRIGHT & LICENSE
 
 Copyright 2006 Shlomi Fish, all rights reserved.
