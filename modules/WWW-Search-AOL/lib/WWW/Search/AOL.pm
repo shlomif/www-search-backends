@@ -20,7 +20,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0100';
 
 use vars qw(@ISA);
 
@@ -56,14 +56,14 @@ sub native_setup_search
 
     $self->{'_next_to_retrieve'} = 1;
 
-    $self->{'search_base_url'} ||= 'http://search.msn.com';
-    $self->{'search_base_path'} ||= '/results.aspx';
+    $self->{'search_base_url'} ||= 'http://search.aol.com';
+    $self->{'search_base_path'} ||= '/aolcom/search';
 
     if (!defined($self->{'_options'}))
     {
         $self->{'_options'} = +{
-            'q' => $native_query,
-            'FORM' => "PORE",
+            'query' => $native_query,
+            'invocationType' => 'topsearchbox.webhome',
         };
     }
     my $self_options = $self->{'_options'};
@@ -107,51 +107,70 @@ sub parse_tree
     {
         $self->{'_AOL_first_retrieve_call'} = undef;
         
-        my $header_div = $tree->look_down("_tag", "div", "id", "header");
+        my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
 
-        my $h5 = $header_div->look_down("_tag", "h5");
-
-        if ($h5->as_text() =~ m{^\s*Page\s*\d+\s*of\s*([\d,]+)\s*results})
+        if ($wr_div->as_text() =~ m{page 1 of (\d+)})
         {
             my $n = $1;
-            $n =~ tr/,//d;
-            $self->approximate_result_count($n);
+            $self->approximate_result_count($n*10);
         }
     }
 
-    my $results_div = $tree->look_down("_tag", "div", "id", "results");
-    my $results_ul = $results_div->look_down("_tag", "ul");
-    my @items;
-    @items = (grep { Scalar::Util::blessed($_) && ($_->tag() eq "li") } $results_ul->content_list());
+=begin Removed
 
-    my $hits_found = 0;
-    foreach my $item (@items)
+    my @h1_divs = $tree->look_down("_tag", "div", "class", "h1");
+    my $requested_div;
+    foreach my $div (@h1_divs)
     {
-        my $h3 = $item->look_down("_tag", "h3");
-        my ($a_tag) = (grep { $_->tag() eq "a" } $h3->content_list());
-        my ($p_tag) = (grep { $_->tag() eq "p" } $item->content_list());
-        my $url = $a_tag->attr("href");
+        my $h1 = $div->look_down("_tag", "h1");
+        if ($h1->as_text() eq "web results")
+        {
+            $requested_div = $div;
+            last;
+        }
+    }
+    if (!defined($requested_div))
+    {
+        die "Could not find div. Please report the error to the author of the module.";
+    }
 
+    my $r_head_div = $requested_div->parent();
+    my $r_web_div = $r_head_div->parent();
+    
+=end Removed
+
+=cut
+
+    my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
+    my $r_web_div = $wr_div->look_down("_tag", "div", "class", "r-web");
+    my @results_divs = $r_web_div->look_down("_tag", "div", "id", qr{^r\d+$});
+    my $hits_found = 0;
+    foreach my $result (@results_divs)
+    {
+        if ($result->attr('id') !~ m/^r(\d+)$/)
+        {
+            die "Broken Parsing. Please contact the author to fix it.";
+        }
+        my $id_num = $1;
+        my $url_tag = $result->look_down("_tag", "b", "id", "ldurl$id_num");
+        my $desc_tag = $result->look_down("_tag", "p", "id", "ldesc$id_num");
+        my $a_tag = $result->look_down("_tag", "a", "id", "lrurl$id_num");
         my $hit = WWW::SearchResult->new();
-        $hit->add_url($url);
+        $hit->add_url($url_tag->as_text());
+        $hit->description($desc_tag->as_text());
         $hit->title($a_tag->as_text());
-        $hit->description(defined($p_tag) ? $p_tag->as_text() : "");
         push @{$self->{'cache'}}, $hit;
         $hits_found++;
     }
 
     # Get the next URL
     {
-        my $pagination_div = $tree->look_down("_tag", "div", "id", "pagination_bottom");
-        my @li_tags = $pagination_div->look_down("_tag", "li");
-        foreach my $li (@li_tags)
+        my $pagination_div = $tree->look_down("_tag", "div", "class", "pagination");
+        my @a_tags = $pagination_div->look_down("_tag", "a");
+        # The reverse() is because it seems the "next" link is at the end.
+        foreach my $a_tag (reverse(@a_tags))
         {
-            my ($a_tag) = (grep { Scalar::Util::blessed($_) && ($_->tag() eq "a") } $li->content_list());
-            if (!$a_tag)
-            {
-                next;
-            }
-            if ($a_tag->as_text() eq "Next")
+            if ($a_tag->as_text() =~ "next")
             {
                 $self->{'_next_url'} =
                     $self->absurl(
