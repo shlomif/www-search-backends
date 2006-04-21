@@ -1,4 +1,4 @@
-package WWW::Search::MSN;
+package WWW::Search::AOL;
 
 use warnings;
 use strict;
@@ -12,7 +12,7 @@ use Scalar::Util ();
 
 =head1 NAME
 
-WWW::Search::MSN - backend for searching search.msn.com
+WWW::Search::AOL - backend for searching search.aol.com
 
 =head1 VERSION
 
@@ -33,7 +33,7 @@ L<http://search.msn.com/>.
 
     use WWW::Search;
 
-    my $oSearch = WWW::Search->new("MSN");
+    my $oSearch = WWW::Search->new("AOL");
 
 =head1 FUNCTIONS
 
@@ -90,7 +90,7 @@ sub native_setup_search
     }
 
     $self->{'_next_url'} = $self->{'search_base_url'} . $self->{'search_base_path'} . '?' . $self->hash_to_cgi_string($self_options);
-    $self->{'_MSN_first_retrieve_call'} = 1;
+    $self->{'_AOL_first_retrieve_call'} = 1;
 }
 
 =head2 parse_tree()
@@ -103,9 +103,9 @@ sub parse_tree
 {
     my ($self, $tree) = @_;
 
-    if ($self->{'_MSN_first_retrieve_call'})
+    if ($self->{'_AOL_first_retrieve_call'})
     {
-        $self->{'_MSN_first_retrieve_call'} = undef;
+        $self->{'_AOL_first_retrieve_call'} = undef;
         
         my $header_div = $tree->look_down("_tag", "div", "id", "header");
 
@@ -190,8 +190,8 @@ L<http://www.redtreesystems.com/>.
 =head1 BUGS
 
 Please report any bugs or feature requests to
-C<bug-www-search-msn@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-Search-MSN>.
+C<bug-www-search-aol@rt.cpan.org>, or through the web interface at
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-Search-AOL>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 
@@ -217,4 +217,4 @@ license).
 
 =cut
 
-1; # End of WWW::Search::MSN
+1; # End of WWW::Search::AOL

@@ -1,6 +1,6 @@
 Build.PL
 Changes
-lib/WWW/Search/MSN.pm
+lib/WWW/Search/AOL.pm
 MANIFEST
 META.yml # Will be created by "make dist"
 README

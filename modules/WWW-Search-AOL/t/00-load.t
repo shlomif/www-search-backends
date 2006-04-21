@@ -4,6 +4,6 @@ use Test::More tests => 1;
 
 BEGIN {
     # TEST
-	use_ok( 'WWW::Search::MSN' );
+	use_ok( 'WWW::Search::AOL' );
 }
 

@@ -10,9 +10,9 @@ BEGIN { use_ok('WWW::Search'); };
 # TEST
 BEGIN { use_ok('WWW::Search::Test'); };
 # TEST
-BEGIN { use_ok('WWW::Search::MSN'); };
+BEGIN { use_ok('WWW::Search::AOL'); };
 
-$WWW::Search::Test::oSearch = new WWW::Search('MSN');
+$WWW::Search::Test::oSearch = new WWW::Search('AOL');
 # TEST
 isa_ok ($WWW::Search::Test::oSearch, "WWW::Search");
 $WWW::Search::Test::oSearch->env_proxy('yes');
