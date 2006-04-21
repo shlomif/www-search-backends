@@ -1,0 +1,9 @@
+Revision history for WWW-Search-MSN
+
+0.0101  Sun Apr 16 14:40:22 IDT 2006
+        - Fixed the POD from its module-starter leftovers.
+        - Added a note about the Subversion repository to the POD.
+
+0.01    Sat Apr 15 21:55:05 IDT 2006
+        First version, released on an unsuspecting world. Works from what
+        I tested.
