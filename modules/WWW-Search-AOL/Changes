@@ -1,9 +1,8 @@
-Revision history for WWW-Search-MSN
+Revision history for WWW-Search-AOL
 
-0.0101  Sun Apr 16 14:40:22 IDT 2006
-        - Fixed the POD from its module-starter leftovers.
-        - Added a note about the Subversion repository to the POD.
-
-0.01    Sat Apr 15 21:55:05 IDT 2006
-        First version, released on an unsuspecting world. Works from what
-        I tested.
+0.0100 Fri Apr 21 14:03:07 IDT 2006
+    First version, released on an unsuspecting world. Works from what
+    I tested. Skeleton for this module was derived from WWW-Search-MSN,
+    which is an earlier module for searching search.msn.com by the same
+    author.
+        

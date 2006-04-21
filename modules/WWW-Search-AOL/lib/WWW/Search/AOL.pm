@@ -29,7 +29,7 @@ use vars qw(@ISA);
 =head1 SYNOPSIS
 
 This module provides a backend of L<WWW::Search> to search using 
-L<http://search.msn.com/>.
+L<http://search.aol.com/>.
 
     use WWW::Search;
 
@@ -187,7 +187,7 @@ sub parse_tree
 =head2 preprocess_results_page()
 
 The purpose of this function is to decode the HTML text as returned by
-search.msn.com as UTF-8.
+search.aol.com as UTF-8.
 
 =cut
 
