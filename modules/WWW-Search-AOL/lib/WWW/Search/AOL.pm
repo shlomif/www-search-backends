@@ -20,7 +20,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0101';
 
 use vars qw(@ISA);
 
@@ -103,10 +103,29 @@ sub parse_tree
 {
     my ($self, $tree) = @_;
 
+    if ($self->{'_AOL_no_results_found'})
+    {
+        return 0;
+    }
+
     if ($self->{'_AOL_first_retrieve_call'})
     {
         $self->{'_AOL_first_retrieve_call'} = undef;
-        
+
+        my $nohit_div = $tree->look_down("_tag", "div", "id", "nohit");
+
+        if (defined($nohit_div))
+        {
+            if (($nohit_div->as_text() =~ /Your search for/) &&
+                ($nohit_div->as_text() =~ /returned no results\./)
+               )
+            {
+                $self->approximate_result_count(0);
+                $self->{'_AOL_no_results_found'} = 1;
+                return 0;
+            }
+        }
+
         my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
 
         if ($wr_div->as_text() =~ m{page 1 of (\d+)})

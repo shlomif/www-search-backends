@@ -1,5 +1,8 @@
 Revision history for WWW-Search-AOL
 
+0.0101 Tue May  2 12:53:47 IDT 2006
+    Fixed handling searches with no results.
+
 0.0100 Fri Apr 21 14:03:07 IDT 2006
     First version, released on an unsuspecting world. Works from what
     I tested. Skeleton for this module was derived from WWW-Search-MSN,
