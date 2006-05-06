@@ -1,5 +1,8 @@
 Revision history for WWW-Search-AOL
 
+0.0102 Sat May  6 19:18:31 IDT 2006
+    More searches with no results fixes.
+
 0.0101 Tue May  2 12:53:47 IDT 2006
     Fixed handling searches with no results.
 
@@ -8,4 +11,4 @@ Revision history for WWW-Search-AOL
     I tested. Skeleton for this module was derived from WWW-Search-MSN,
     which is an earlier module for searching search.msn.com by the same
     author.
-        
+
