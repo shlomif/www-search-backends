@@ -99,6 +99,15 @@ This function parses the tree and fetches the results.
 
 =cut
 
+sub _no_hits
+{
+    my $self = shift;
+
+    $self->approximate_result_count(0);
+    $self->{'_AOL_no_results_found'} = 1;
+    return 0;
+}
+
 sub parse_tree
 {
     my ($self, $tree) = @_;
@@ -120,13 +129,16 @@ sub parse_tree
                 ($nohit_div->as_text() =~ /returned no results\./)
                )
             {
-                $self->approximate_result_count(0);
-                $self->{'_AOL_no_results_found'} = 1;
-                return 0;
+                return $self->_no_hits();
             }
         }
 
         my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
+
+        if (!defined($wr_div))
+        {
+            return $self->_no_hits();
+        }
 
         if ($wr_div->as_text() =~ m{page 1 of (\d+)})
         {
