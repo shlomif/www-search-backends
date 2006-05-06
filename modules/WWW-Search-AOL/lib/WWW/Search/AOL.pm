@@ -20,7 +20,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0102';
 
 use vars qw(@ISA);
 
