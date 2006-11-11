@@ -6,6 +6,7 @@ META.yml # Will be created by "make dist"
 README
 t/00-load.t
 t/01basic.t
+t/02empty.t
 t/pod-coverage.t
 t/pod.t
 Makefile.PL

@@ -20,7 +20,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.0102';
+our $VERSION = '0.0104';
 
 use vars qw(@ISA);
 
@@ -107,8 +107,12 @@ sub parse_tree
     {
         $self->{'_MSN_first_retrieve_call'} = undef;
         
-        my $header_div = $tree->look_down("_tag", "div", "id", "header");
+        my $header_div = $tree->look_down("_tag", "div", "id", "search_header");
 
+        if (!defined($header_div))
+        {
+            return 0;
+        }
         my $h5 = $header_div->look_down("_tag", "h5");
 
         if ($h5->as_text() =~ m{^\s*Page\s*\d+\s*of\s*([\d,]+)\s*results})
@@ -143,22 +147,17 @@ sub parse_tree
     # Get the next URL
     {
         my $pagination_div = $tree->look_down("_tag", "div", "id", "pagination_bottom");
-        my @li_tags = $pagination_div->look_down("_tag", "li");
-        foreach my $li (@li_tags)
+        my ($li) = $pagination_div->look_down("_tag", "li", "class", "nextPage");
+        if ($li)
         {
             my ($a_tag) = (grep { Scalar::Util::blessed($_) && ($_->tag() eq "a") } $li->content_list());
-            if (!$a_tag)
-            {
-                next;
-            }
-            if ($a_tag->as_text() eq "Next")
+            if ($a_tag)
             {
                 $self->{'_next_url'} =
                     $self->absurl(
                         $self->{'_prev_url'},
                         $a_tag->attr('href')
                     );
-                last;
             }
         }
     }

@@ -1,5 +1,15 @@
 Revision history for WWW-Search-MSN
 
+0.0104  Sat Nov 11 10:10:12 IST 2006
+        - Fixed https://rt.cpan.org/Ticket/Display.html?id=21568 -
+        search.msn.com changed their markup.
+            - Thanks to PURDY for reporting it!
+
+0.0103  Fri Jul 28 12:08:08 IDT 2006
+        - Added 02empty.t to test for an empty result set.
+        - Fixed bug http://rt.cpan.org/Ticket/Display.html?id=20649
+            - Thanks to Tomasz Chomiuk for reporting it.
+
 0.0102  Wed Jul 12 21:04:58 IDT 2006
         - In 01basic.t the test now matches http:// and https:// instead of 
         just http://
