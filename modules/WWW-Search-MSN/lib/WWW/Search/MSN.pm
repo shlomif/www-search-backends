@@ -54,6 +54,8 @@ sub native_setup_search
 
     $self->user_agent('non-robot');
 
+    $self->user_agent()->default_header('Accept-Language' => "en");
+
     $self->{'_next_to_retrieve'} = 1;
 
     $self->{'search_base_url'} ||= 'http://search.msn.com';
@@ -107,15 +109,20 @@ sub parse_tree
     {
         $self->{'_MSN_first_retrieve_call'} = undef;
         
-        my $header_div = $tree->look_down("_tag", "div", "id", "search_header");
+        my $header_div = $tree->look_down("_tag", "div", "id", "results_area");
 
         if (!defined($header_div))
         {
             return 0;
         }
-        my $h5 = $header_div->look_down("_tag", "h5");
+        my $h5 = $header_div->look_down("_tag", "span", "id", "count");
 
-        if ($h5->as_text() =~ m{^\s*Page\s*\d+\s*of\s*([\d,]+)\s*results})
+        if (!defined($h5))
+        {
+            return 0;
+        }
+
+        if ($h5->as_text() =~ m{^\d+-\d+\s+of\s+([\d,]+)\s+results})
         {
             my $n = $1;
             $n =~ tr/,//d;
@@ -146,37 +153,19 @@ sub parse_tree
 
     # Get the next URL
     {
-        my $pagination_div = $tree->look_down("_tag", "div", "id", "pagination_bottom");
-        my ($li) = $pagination_div->look_down("_tag", "li", "class", "nextPage");
-        if ($li)
+        my $pagination_div = $tree->look_down("_tag", "div", "class", "sb_pag");
+        my ($a_tag) = $pagination_div->look_down("_tag", "a", "class", "sb_pagN");
+
+        if ($a_tag)
         {
-            my ($a_tag) = (grep { Scalar::Util::blessed($_) && ($_->tag() eq "a") } $li->content_list());
-            if ($a_tag)
-            {
-                $self->{'_next_url'} =
-                    $self->absurl(
+            $self->{'_next_url'} =
+                $self->absurl(
                         $self->{'_prev_url'},
                         $a_tag->attr('href')
                     );
-            }
         }
     }
     return $hits_found;
-}
-
-=head2 preprocess_results_page()
-
-The purpose of this function is to decode the HTML text as returned by
-search.msn.com as UTF-8.
-
-=cut
-
-sub preprocess_results_page
-{
-    my $self = shift;
-    my $contents = shift;
-
-    return decode('UTF-8', $contents);
 }
 
 =head1 AUTHOR
