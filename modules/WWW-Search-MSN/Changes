@@ -1,5 +1,8 @@
 Revision history for WWW-Search-MSN
 
+0.0105  Thu Nov 27 21:29:46 IST 2008
+        - Updated to the new MSN Search syntax.
+
 0.0104  Sat Nov 11 10:10:12 IST 2006
         - Fixed https://rt.cpan.org/Ticket/Display.html?id=21568 -
         search.msn.com changed their markup.
