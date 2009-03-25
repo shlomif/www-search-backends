@@ -4,13 +4,13 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     module_name         => 'WWW::Search::AOL',
-    license             => 'bsd',
+    license             => 'mit',
     dist_author         => 'Shlomi Fish <shlomif@iglu.org.il>',
     dist_version_from   => 'lib/WWW/Search/AOL.pm',
     requires => {
         'Test::More' => 0,
-        'WWW::Search' => 2.523,
-        'WWW::Search::Test' => 2.265,
+        'WWW::Search' => 2.565,
+        'WWW::Search::Test' => 2.287,
         'HTML::TreeBuilder' => 0,
         'Scalar::Util' => 0,
     },

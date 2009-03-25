@@ -52,7 +52,7 @@ is (scalar(@results), 50, "Checking for results");
 # TEST*2*50
 foreach my $r (@results)
 {
-    like ($r->url(), qr{\Ahttp://},
+    like ($r->url(), qr{\A(?:http|https)?://},
         'Result URL is http');
     ok ((length($r->title()) > 0), "Has a non-empty title");
 }

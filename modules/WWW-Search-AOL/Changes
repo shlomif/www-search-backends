@@ -1,5 +1,10 @@
 Revision history for WWW-Search-AOL
 
+0.0103 Wed Mar 25 18:03:37 IST 2009
+    - Updated to the recent markup as returned by search.aol.com
+    - Updated to the recent UTF-8 handling of WWW::Search, and now
+    depending on it in Build.PL.
+
 0.0102 Sat May  6 19:18:31 IDT 2006
     More searches with no results fixes.
 

@@ -16,11 +16,11 @@ WWW::Search::AOL - backend for searching search.aol.com
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0103
 
 =cut
 
-our $VERSION = '0.0102';
+our $VERSION = '0.0103';
 
 use vars qw(@ISA);
 
@@ -121,7 +121,7 @@ sub parse_tree
     {
         $self->{'_AOL_first_retrieve_call'} = undef;
 
-        my $nohit_div = $tree->look_down("_tag", "div", "id", "nohit");
+        my $nohit_div = $tree->look_down("_tag", "div", "class", "NH");
 
         if (defined($nohit_div))
         {
@@ -133,17 +133,25 @@ sub parse_tree
             }
         }
 
-        my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
+        my $wr_div = $tree->look_down("_tag", "div", "class", "BB");
 
         if (!defined($wr_div))
         {
             return $self->_no_hits();
         }
 
-        if ($wr_div->as_text() =~ m{page 1 of (\d+)})
+        # A word separator that includes whitespace and &nbsp; (\x{a0}.
+        my $word_sep = qr/[\s\x{a0}]+/;
+
+        if (my ($n) = 
+            (
+                $wr_div->as_text() =~ 
+                m/of${word_sep}about${word_sep}([\d,]+)/
+            )
+        )
         {
-            my $n = $1;
-            $self->approximate_result_count($n*10);
+            $n =~ tr/,//d;
+            $self->approximate_result_count($n);
         }
     }
 
@@ -172,22 +180,20 @@ sub parse_tree
 
 =cut
 
-    my $wr_div = $tree->look_down("_tag", "div", "id", "wr");
-    my $r_web_div = $wr_div->look_down("_tag", "div", "class", "r-web");
-    my @results_divs = $r_web_div->look_down("_tag", "div", "id", qr{^r\d+$});
+    my $r_web_div = $tree->look_down("_tag", "ul", "content", "MSL");
+    my @results_divs = $r_web_div->look_down("_tag", "li", "about", qr{^r\d+$});
     my $hits_found = 0;
     foreach my $result (@results_divs)
     {
-        if ($result->attr('id') !~ m/^r(\d+)$/)
+        if ($result->attr('about') !~ m/^r(\d+)$/)
         {
             die "Broken Parsing. Please contact the author to fix it.";
         }
         my $id_num = $1;
-        my $url_tag = $result->look_down("_tag", "b", "id", "ldurl$id_num");
-        my $desc_tag = $result->look_down("_tag", "p", "id", "ldesc$id_num");
-        my $a_tag = $result->look_down("_tag", "a", "id", "lrurl$id_num");
+        my $desc_tag = $result->look_down("_tag", "p", "property", "f:desc");
+        my $a_tag = $result->look_down("_tag", "a", "class", "find");
         my $hit = WWW::SearchResult->new();
-        $hit->add_url($url_tag->as_text());
+        $hit->add_url($a_tag->attr("href"));
         $hit->description($desc_tag->as_text());
         $hit->title($a_tag->as_text());
         push @{$self->{'cache'}}, $hit;
@@ -196,12 +202,13 @@ sub parse_tree
 
     # Get the next URL
     {
-        my $pagination_div = $tree->look_down("_tag", "div", "class", "pagination");
-        my @a_tags = $pagination_div->look_down("_tag", "a");
-        # The reverse() is because it seems the "next" link is at the end.
+        my $span_next_page = $tree->look_down("_tag", "span", "class", "gspPageNext");
+        my @a_tags = $span_next_page->look_down("_tag", "a");
+        # The reverse() is there because it seems the "next" link is at 
+        # the end.
         foreach my $a_tag (reverse(@a_tags))
         {
-            if ($a_tag->as_text() =~ "next")
+            if ($a_tag->as_text() =~ "Next")
             {
                 $self->{'_next_url'} =
                     $self->absurl(
@@ -215,12 +222,14 @@ sub parse_tree
     return $hits_found;
 }
 
+
+=begin Removed
+
 =head2 preprocess_results_page()
 
-The purpose of this function is to decode the HTML text as returned by
-search.aol.com as UTF-8.
-
-=cut
+The purpose of this function was to decode the HTML text as returned by
+search.aol.com as UTF-8. But it seems recent versions of WWW::Search already
+have a similar mechanism.
 
 sub preprocess_results_page
 {
@@ -229,6 +238,10 @@ sub preprocess_results_page
 
     return decode('UTF-8', $contents);
 }
+
+=end Removed
+
+=cut
 
 =head1 AUTHOR
 
