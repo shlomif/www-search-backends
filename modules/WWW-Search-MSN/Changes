@@ -1,5 +1,10 @@
 Revision history for WWW-Search-MSN
 
+0.0106
+        - Making sure we do the right thing, when a possibly non-existent 
+        element was not found and as a result was assigned undef.
+            - Fixes https://rt.cpan.org/Ticket/Display.html?id=43339
+
 0.0105  Thu Nov 27 21:29:46 IST 2008
         - Updated to the new MSN Search syntax.
 

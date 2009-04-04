@@ -153,16 +153,22 @@ sub parse_tree
 
     # Get the next URL
     {
-        my $pagination_div = $tree->look_down("_tag", "div", "class", "sb_pag");
-        my ($a_tag) = $pagination_div->look_down("_tag", "a", "class", "sb_pagN");
-
-        if ($a_tag)
+        my $pagination_div =
+            $tree->look_down("_tag", "div", "class", "sb_pag");
+        if ($pagination_div)
         {
-            $self->{'_next_url'} =
-                $self->absurl(
-                        $self->{'_prev_url'},
-                        $a_tag->attr('href')
-                    );
+            my ($a_tag) = $pagination_div->look_down(
+                "_tag", "a", "class", "sb_pagN"
+            );
+
+            if ($a_tag)
+            {
+                $self->{'_next_url'} =
+                    $self->absurl(
+                            $self->{'_prev_url'},
+                            $a_tag->attr('href')
+                        );
+            }
         }
     }
     return $hits_found;
