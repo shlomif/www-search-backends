@@ -18,11 +18,11 @@ WWW::Search::MSN - backend for searching search.msn.com
 
 =head1 VERSION
 
-Version 0.0105
+Version 0.0200
 
 =cut
 
-our $VERSION = '0.0106';
+our $VERSION = '0.0200';
 
 use vars qw(@ISA);
 
