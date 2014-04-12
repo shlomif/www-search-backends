@@ -3,6 +3,8 @@ package WWW::Search::MSN;
 use warnings;
 use strict;
 
+use 5.008;
+
 require WWW::Search;
 
 use WWW::SearchResult;
@@ -25,6 +27,10 @@ our $VERSION = '0.0106';
 use vars qw(@ISA);
 
 @ISA=(qw(WWW::Search));
+
+=head1 WARNING! THIS MODULE IS DEPRECATED
+
+You should be using L<Bing::Search> instead which uses the API.
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,9 @@
 use strict;
 use warnings;
 
-use Test::More tests => 108;
+# use Test::More tests => 108;
+#
+use Test::More skip_all => "This module is deprecated!";
 
 # TEST
 BEGIN { use_ok('WWW::Search'); };
@@ -23,7 +25,7 @@ my $dump  = 0;
 $debug = 0;
 $dump = 0;
 
-my $count = 
+my $count =
     WWW::Search::Test::count_results(
         'normal',
         'firs' . 't co' . 'me f' . 'irst se' . 'rved',

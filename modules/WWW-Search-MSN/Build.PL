@@ -7,7 +7,13 @@ my $builder = Module::Build->new(
     license             => 'mit',
     dist_author         => 'Shlomi Fish <shlomif@iglu.org.il>',
     dist_version_from   => 'lib/WWW/Search/MSN.pm',
-    requires => {
+    configure_requires =>
+    {
+        'Module::Build' => '0.36',
+    },
+    requires =>
+    {
+        'perl' => '5.008',
         'Encode' => 0,
         'HTML::TreeBuilder' => 0,
         'Scalar::Util' => 0,

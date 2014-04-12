@@ -3,7 +3,8 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More skip_all => 'This module is deprecated!';
+# use Test::More tests => 6;
 
 # TEST
 BEGIN { use_ok('WWW::Search'); };
@@ -29,7 +30,7 @@ my $string2 = 'dnder34hg328vnnblkngm23';
 
 $string2 =~ tr/a-z/bacdghuyjvbkmlllkmzxlcmlz/;
 
-my $count = 
+my $count =
     WWW::Search::Test::count_results(
         'normal',
         "$string1$string2",
