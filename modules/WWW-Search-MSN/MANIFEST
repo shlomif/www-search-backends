@@ -10,5 +10,6 @@ lib/WWW/Search/MSN.pm
 t/00-load.t
 t/01basic.t
 t/02empty.t
+t/cpan-changes.t
 t/pod-coverage.t
 t/pod.t
