@@ -28,7 +28,7 @@ use vars qw(@ISA);
 
 =head1 SYNOPSIS
 
-This module provides a backend of L<WWW::Search> to search using 
+This module provides a backend of L<WWW::Search> to search using
 L<http://search.msn.com/>.
 
     use WWW::Search;
@@ -108,7 +108,7 @@ sub parse_tree
     if ($self->{'_MSN_first_retrieve_call'})
     {
         $self->{'_MSN_first_retrieve_call'} = undef;
-        
+
         my $header_div = $tree->look_down("_tag", "div", "id", "results_area");
 
         if (!defined($header_div))
