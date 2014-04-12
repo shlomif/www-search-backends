@@ -1,0 +1,20 @@
+modules/WWW-Search-AOL/Build
+modules/WWW-Search-AOL/META.json
+modules/WWW-Search-AOL/META.yml
+modules/WWW-Search-AOL/MYMETA.json
+modules/WWW-Search-AOL/MYMETA.yml
+modules/WWW-Search-AOL/Makefile.PL
+modules/WWW-Search-AOL/_build
+modules/WWW-Search-AOL/blib
+modules/WWW-Search-MSN/Build
+modules/WWW-Search-MSN/META.json
+modules/WWW-Search-MSN/META.yml
+modules/WWW-Search-MSN/MYMETA.json
+modules/WWW-Search-MSN/MYMETA.yml
+modules/WWW-Search-MSN/Makefile.PL
+modules/WWW-Search-MSN/_build
+modules/WWW-Search-MSN/blib
+
+syntax: regexp
+
+^modules/WWW-Search-MSN/WWW-Search-MSN-v?\d+\.\d+(?:\.\d+)?(?:/|\.tar\.gz$)
