@@ -18,11 +18,11 @@ WWW::Search::AOL - backend for searching search.aol.com
 
 =head1 VERSION
 
-Version 0.0103
+Version 0.0104
 
 =cut
 
-our $VERSION = '0.0103';
+our $VERSION = '0.0104';
 
 use vars qw(@ISA);
 
