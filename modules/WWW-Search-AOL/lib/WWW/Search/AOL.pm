@@ -3,6 +3,8 @@ package WWW::Search::AOL;
 use warnings;
 use strict;
 
+use 5.008;
+
 require WWW::Search;
 
 use WWW::SearchResult;
@@ -28,7 +30,7 @@ use vars qw(@ISA);
 
 =head1 SYNOPSIS
 
-This module provides a backend of L<WWW::Search> to search using 
+This module provides a backend of L<WWW::Search> to search using
 L<http://search.aol.com/>.
 
     use WWW::Search;
@@ -143,9 +145,9 @@ sub parse_tree
         # A word separator that includes whitespace and &nbsp; (\x{a0}.
         my $word_sep = qr/[\s\x{a0}]+/;
 
-        if (my ($n) = 
+        if (my ($n) =
             (
-                $wr_div->as_text() =~ 
+                $wr_div->as_text() =~
                 m/of${word_sep}about${word_sep}([\d,]+)/
             )
         )
@@ -175,7 +177,7 @@ sub parse_tree
 
     my $r_head_div = $requested_div->parent();
     my $r_web_div = $r_head_div->parent();
-    
+
 =end Removed
 
 =cut
@@ -204,7 +206,7 @@ sub parse_tree
     {
         my $span_next_page = $tree->look_down("_tag", "span", "class", "gspPageNext");
         my @a_tags = $span_next_page->look_down("_tag", "a");
-        # The reverse() is there because it seems the "next" link is at 
+        # The reverse() is there because it seems the "next" link is at
         # the end.
         foreach my $a_tag (reverse(@a_tags))
         {
