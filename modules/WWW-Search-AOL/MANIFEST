@@ -2,6 +2,7 @@ Build.PL
 Changes
 LICENSE
 MANIFEST
+META.json
 META.yml # Will be created by "make dist"
 Makefile.PL
 README
@@ -9,6 +10,7 @@ lib/WWW/Search/AOL.pm
 t/00-load.t
 t/01basic.t
 t/02no-results.t
+t/cpan-changes.t
 t/pod-coverage.t
 t/pod.t
-META.json
+t/style-trailing-space.t

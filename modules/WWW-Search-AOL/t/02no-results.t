@@ -23,7 +23,7 @@ my $dump  = 0;
 $debug = 0;
 $dump = 0;
 
-my $count = 
+my $count =
     WWW::Search::Test::count_results(
         'normal',
         'link:http://wnviuncsivndkvndvjnbpwnvinsvdiondvs.goj/',

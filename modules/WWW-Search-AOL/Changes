@@ -2,6 +2,7 @@ Revision history for WWW-Search-AOL
 
 0.0104  2014-04-29
     - configure_requires and requires to minimal perl version (CPANTS).
+    - Add t/cpan-changes.t and t/style-trailing-space.t
 
 0.0103  2009-03-25
     - Updated to the recent markup as returned by search.aol.com
