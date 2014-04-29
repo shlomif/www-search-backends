@@ -1,17 +1,20 @@
 Revision history for WWW-Search-AOL
 
-0.0103 Wed Mar 25 18:03:37 IST 2009
+0.0104  2014-04-29
+    - configure_requires and requires to minimal perl version (CPANTS).
+
+0.0103  2009-03-25
     - Updated to the recent markup as returned by search.aol.com
     - Updated to the recent UTF-8 handling of WWW::Search, and now
     depending on it in Build.PL.
 
-0.0102 Sat May  6 19:18:31 IDT 2006
+0.0102  2006-05-06
     More searches with no results fixes.
 
-0.0101 Tue May  2 12:53:47 IDT 2006
+0.0101  2006-05-02
     Fixed handling searches with no results.
 
-0.0100 Fri Apr 21 14:03:07 IDT 2006
+0.0100  2006-04-21
     First version, released on an unsuspecting world. Works from what
     I tested. Skeleton for this module was derived from WWW-Search-MSN,
     which is an earlier module for searching search.msn.com by the same
