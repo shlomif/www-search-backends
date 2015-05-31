@@ -1,5 +1,8 @@
 Revision history for WWW-Search-MSN
 
+0.0201  2015-05-31
+        - Add VCS repository info to META.yml/META.json.
+
 0.0200  2014-04-12
         - Deprecate the module in favour of Bing::Search.
         - Various CPANTS Kwalitee fixes.
