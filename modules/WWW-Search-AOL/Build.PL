@@ -20,6 +20,13 @@ my $builder = Module::Build->new(
     },
     add_to_cleanup      => [ 'WWW-Search-AOL-*' ],
     create_makefile_pl => 'traditional',
+    meta_merge =>
+    {
+        resources =>
+        {
+            repository => 'http://bitbucket.org/shlomif/www-search-backends',
+        },
+    },
 );
 
 $builder->create_build_script();

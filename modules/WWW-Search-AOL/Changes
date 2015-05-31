@@ -1,5 +1,8 @@
 Revision history for WWW-Search-AOL
 
+0.0105  2015-05-31
+    - Add VCS Repository in META.yml/META.json.
+
 0.0104  2014-04-29
     - configure_requires and requires to minimal perl version (CPANTS).
     - Add t/cpan-changes.t and t/style-trailing-space.t
