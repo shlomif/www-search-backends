@@ -5,7 +5,7 @@ use Module::Build;
 my $builder = Module::Build->new(
     module_name         => 'WWW::Search::AOL',
     license             => 'mit',
-    dist_author         => 'Shlomi Fish <shlomif@iglu.org.il>',
+    dist_author         => 'Shlomi Fish',
     dist_version_from   => 'lib/WWW/Search/AOL.pm',
     configure_requires => {
         'Module::Build' => '0.36',
