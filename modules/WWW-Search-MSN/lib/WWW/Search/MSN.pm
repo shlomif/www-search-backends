@@ -18,11 +18,11 @@ WWW::Search::MSN - backend for searching search.msn.com
 
 =head1 VERSION
 
-Version 0.0201
+Version 0.0202
 
 =cut
 
-our $VERSION = '0.0201';
+our $VERSION = '0.0202';
 
 use vars qw(@ISA);
 
@@ -182,7 +182,7 @@ sub parse_tree
 
 =head1 AUTHOR
 
-Shlomi Fish, C<< <shlomif@iglu.org.il> >>
+Shlomi Fish, L<http://www.shlomifish.org/> .
 
 Funded by L<http://www.deviatemedia.com/> and
 L<http://www.redtreesystems.com/>.
