@@ -16,6 +16,11 @@ use Scalar::Util ();
 
 WWW::Search::AOL - backend for searching search.aol.com
 
+=head1 NOTE
+
+This module currently does not work. I'll fix it if there's interest to
+fix it.
+
 =head1 VERSION
 
 Version 0.0106
