@@ -1,5 +1,9 @@
 Revision history for WWW-Search-AOL
 
+0.0107  2015-12-30
+    - Skip failing tests.
+        - https://rt.cpan.org/Ticket/Display.html?id=106742
+
 0.0106  2015-12-28
     - Update away from old E-mail address.
 

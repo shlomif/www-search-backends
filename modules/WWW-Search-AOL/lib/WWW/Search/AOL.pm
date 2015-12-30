@@ -23,11 +23,11 @@ fix it.
 
 =head1 VERSION
 
-Version 0.0106
+Version 0.0107
 
 =cut
 
-our $VERSION = '0.0106';
+our $VERSION = '0.0107';
 
 use vars qw(@ISA);
 
